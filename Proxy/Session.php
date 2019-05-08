@@ -18,12 +18,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Leevel\Session\Facade;
+namespace Leevel\Session\Proxy;
 
 use Leevel\Di\Container;
 
 /**
- * 门面 session.
+ * 代理 session.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
