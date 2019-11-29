@@ -18,21 +18,40 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Leevel\Session\Helper;
+namespace Leevel\Session;
 
-use Leevel\Di\Container;
-use Leevel\Session\ISession;
+use function Leevel\Support\Str\un_camelize;
+use Leevel\Support\Str\un_camelize;
 
 /**
- * Session 服务
+ * 助手类.
  *
- * @return \Leevel\Session\ISession
+ * @author Xiangmin Liu <635750556@qq.com>
+ *
+ * @since 2019.08.21
+ *
+ * @version 1.0
  */
-function session(): ISession
+class Helper
 {
-    return Container::singletons()->make('sessions');
+    /**
+     * call.
+     *
+     * @param string $method
+     * @param array  $args
+     *
+     * @return mixed
+     */
+    public static function __callStatic(string $method, array $args)
+    {
+        $fn = __NAMESPACE__.'\\Helper\\'.un_camelize($method);
+        if (!function_exists($fn)) {
+            class_exists($fn);
+        }
+
+        return $fn(...$args);
+    }
 }
 
-class session
-{
-}
+// import fn.
+class_exists(un_camelize::class);
